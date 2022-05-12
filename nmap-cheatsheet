@@ -1,0 +1,322 @@
+<<<------------------------------------------------------------>>>
+^ _ __  _ __ ___   __ _ _ __         ___ ___| |__   ___  ___| |_   ^
+^| '_ \| '_ ` _ \ / _` | '_ \ _____ / __/ __| '_ \ / _ \/ _ \ __|  ^
+^| | | | | | | | | (_| | |_) |_____| (__\__ \ | | |  __/  __/ |_   ^
+^|_| |_|_| |_| |_|\__,_| .__/       \___|___/_| |_|\___|\___|\__|  ^
+^                      |_|                                         ^
+<<<------------------------------------------------------------->>>
+
+TARGET SPECIFICATION:
+
+Command:                     Description:
+------------------------------------------------
+nmap x.x.x.x                 Scan a single IP  |
+------------------------------------------------
+nmap x.x.x.x y.y.y.y         Scan specific IPs |
+------------------------------------------------
+nmap x.x.x.x-x               Scan an IP range  |
+------------------------------------------------
+nmap scanme.nmap.org         Scan a domain     |
+-------------------------------------------------------
+nmap x.x.x.x/24              Scan using CIDR notation |
+-------------------------------------------------------
+nmap -iL targets.txt         Scan targets from a file |
+-------------------------------------------------------
+nmap -R 100                  Scan 100 random hosts    |
+-------------------------------------------------------
+nmap -exclude x.x.x.x        Exclude listed hosts     |
+-------------------------------------------------------
+
+<<<------------------------------------------------>>>
+
+SCAN TECHNIQUES:
+
+Command:                     Description:
+----------------------------------------------------------
+nmap x.x.x.x -sS             TCP SYN port scan (Default) |
+-------------------------------------------------------------------------------------
+nmap x.x.x.x -sT             TCP connect port scan (Default without root privilege) |
+-------------------------------------------------------------------------------------
+nmap x.x.x.x -sU             UDP port scan |
+------------------------------------------------
+nmap x.x.x.x -sA             TCP ACK port scan |
+---------------------------------------------------
+nmap x.x.x.x -sW             TCP window port scan |
+---------------------------------------------------
+nmap x.x.x.x -sM             TCP Maimon port scan |
+---------------------------------------------------
+
+<<<------------------------------------------------>>>
+
+HOST DISCOVERY:
+
+Command:                     Description:
+----------------------------------------------------------
+nmap x.x.x.x -sL             No Scan. List targets only  |
+-------------------------------------------------------------------------
+nmap x.x.x.x -sn             Disable port scanning. Host discovery only |
+-------------------------------------------------------------------------
+nmap x.x.x.x -Pn             Disable host discovery. Port scan only     |
+-------------------------------------------------------------------------------
+nmap x.x.x.x-x -PSxx-xx,xx   TCP SYN discovery on port x. Port 80 by default  |
+-------------------------------------------------------------------------------
+nmap x.x.x.x-x -PAxx-xx,xx   TCP ACK discovery on port x. Port 80 by default. |
+-------------------------------------------------------------------------------
+nmap x.x.x.x-x -PUxx         UDP discovery on port x. Port 40125 by default.  |
+-------------------------------------------------------------------------------
+nmap x.x.x.x-x/24 -PR        ARP discovery on local network |
+-------------------------------------------------------------
+nmap x.x.x.x -n              Never do DNS resolution |
+------------------------------------------------------
+
+<<<------------------------------------------------>>>
+
+PORT SPECIFICATION:
+
+Command:                     Description:
+------------------------------------------------------
+nmap x.x.x.x -p xx           Port scan for port x    |
+------------------------------------------------------
+nmap x.x.x.x -p xx-xx        Port range scan |
+-------------------------------------------------------------------
+nmap x.x.x.x -p U:xx,T:xx    Port scan multiple TCP and UDP ports |
+------------------------------------------------------------------- 
+nmap x.x.x.x -p-             Port scan all ports |
+----------------------------------------------------------
+nmap x.x.x.x -p http,https   Port scan from service name |
+----------------------------------------------------------
+nmap x.x.x.x -F              Fast port scan (100 ports)  |
+----------------------------------------------------------
+nmap x.x.x.x -top-ports xxx  Port scan the top x ports   |
+-----------------------------------------------------------------------------------------------
+nmap x.x.x.x -p-65535        Leaving off initial port in range makes the scan start at port 1 |
+----------------------------------------------------------------------------------------------------
+nmap x.x.x.x -p0-            Leaving off end port in range makes the scan fo through to port 65535 |
+----------------------------------------------------------------------------------------------------
+
+<<<------------------------------------------------->>>
+
+SERVICE AND VERSION DETECTION:
+
+Command:                     Description:
+-----------------------------------------------------------------------------------------------
+nmap x.x.x.x -sV             Attempts to determine the version of the service running on port |
+---------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -sV --version-intensity 8 | Intensity level 0 to 9. higher number increases possibility of correctness |
+---------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -sV --version-light | Enable light mode. Lower possibility of correctness. Faster.   |
+---------------------------------------------------------------------------------------------------
+nmap -sV --version-all       Enable intensity level 9. Higher possibility of correctness. Slower. |
+------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -A              Enables OS detection, version detection, script running, and traceroute |
+------------------------------------------------------------------------------------------------------
+
+<<<------------------------------------------------->>>
+
+OS DETECTION:
+
+Command:                     Description:
+------------------------------------------------------------------------------------
+nmap x.x.x.x -O              Remote OS detection using TCP/IP stack fingerprinting |
+------------------------------------------------------------------------------------
+nmap x.x.x.x -O --osscan-limit | If at least one open and one closed TCP port are not found it will not try OS detection against host |
+-------------------------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -O --osscan-guess | Makes Nmap guess more aggressively |
+----------------------------------------------------------------------------------------------------
+nmap x.x.x.x -O --max-os-tries x | Set the maximum number x of OS detection tries against a target |
+-------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -A              Enables OS detection, version detection, script scanning, and traceroute |
+-------------------------------------------------------------------------------------------------------
+
+<<<------------------------------------------------->>>
+
+TIMING AND PERFORMANCE:
+
+Command:                     Description:
+------------------------------------------------------------------------------
+nmap x.x.x.x -T0             Paranoid (0) Intrusion Detection System evasion |
+------------------------------------------------------------------------------
+nmap x.x.x.x -T1             Sneaky (1) IDS evasion |
+------------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -T2             Polite (2) slows down the scan to use less bandwith and use less target machine resources |
+------------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -T3             Normal (3) which is default speed |
+---------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -T4             Aggressive (4) speeds scans; assumes you are on a reasonably fast and reliable network |
+---------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -T5             Insane (5) speeds scan; assumes you are on an extraordinarily fast network |
+---------------------------------------------------------------------------------------------------------
+
+Flags:                       Example input:                 Description:
+-------------------------------------------------------------------------------------------------
+--host-timeout <time>        1s; 4m; 2h                     Give up on a target after this long |
+-------------------------------------------------------------------------------------------------------------
+--min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout <time> | 1s; 4m; 2h | Specifies probe round trip time |
+-------------------------------------------------------------------------------------------------------------
+--min-hostgroup/max-hostgroup <size<size> | 50; 1024 | Parallel host scan group sizes |
+---------------------------------------------------------------------------------------
+--min-parallelism/max-parallelism <numprobes> | 10; 1 | Probe parallelization |
+-----------------------------------------------------------------------------------------
+--scan-delay/--max-scan-delay <time> | 20ms; 2s; 4m; 5h |   Adjust delay between probes |
+---------------------------------------------------------------------------------------------------------------------------
+--max-retries <tries>        3                              Specify the maximum number of port scan probe retransmissions |
+---------------------------------------------------------------------------------------------------------------------------
+--min-rate <number>          100                            Send packets no slower than <number> per second |
+-------------------------------------------------------------------------------------------------------------
+--max-rate <number>          100                            Send packets no faster than <number> per second |
+-------------------------------------------------------------------------------------------------------------
+
+<<<------------------------------------------------->>>
+
+NSE SCRIPTS ******:
+
+Command                      Description:
+-------------------------------------------------------------------------------------------------------
+nmap x.x.x.x -sC             Scan with default NSE scripts. Considered useful for discovery and safe. |
+-------------------------------------------------------------------------------------------------------
+nmap x.x.x.x --script default | same above |
+-------------------------------------------------------------------------
+nmap x.x.x.x --script=banner Scan with a single script. Example: banner |
+-------------------------------------------------------------------------
+nmap x.x.x.x --script=http*  Scan with a wildcard. Example: http |
+-------------------------------------------------------------------------------------
+nmap x.x.x.x --script=http,banner | Scan with two scripts. Example: http and banner |
+-------------------------------------------------------------------------------------
+nmap x.x.x.x --script "not intrusive" | Scan default, but remove intrusive scripts |
+-----------------------------------------------------------------------------------------------------------
+nmap x.x.x.x --script snmp-sysdescr --script-args snmpcommunity=admin x.x.x.x | NSE script with arguments |
+-----------------------------------------------------------------------------------------------------------
+
+<<<------------------------------------------------->>>
+
+USEFUL NSE SCRIPT EXAMPLE:
+
+Command:                     Description:
+------------------------------------------------------------------------------------
+nmap -Pn --script=http-sitemap-generator scanme.nmap.org | http site map generator |
+------------------------------------------------------------------------------------------------------------
+nmap -n -Pn -p 80 --open -sV -vvv --script banner,http-title -iR 1000 | Fast search for random web servers |
+------------------------------------------------------------------------------------------------------------
+nmap -Pn --script=dns-brute <domain.com> | Brute forces DNS hostnames guessing subdomains |
+-------------------------------------------------------------------------------------------
+nmap -n -Pn -vv -O -sV --script smb-enum*,smb-ls,smb-mbenum,smb-os-discovery,smb-s*,smb-vuln*,smbv2* -vv x.x.x.x | Safe SMB scripts to run |
+---------------------------------------------------------------------------------------------------------------------------
+nmap --script whois* <domain.com> | whois query |
+-----------------------------------------------------------------------------------------------------------
+nmap -pxx --script http-unsafe-output-escaping <domain.com> | Detect cross site scripting vulnerabilities |
+-----------------------------------------------------------------------------------------------------------
+nmap -pxx --script http-sql-injection <domain.com> | Check for SQL injections |
+-------------------------------------------------------------------------------
+
+<<<------------------------------------------------->>>
+
+FIREWALL / IDS EVASION AND SPOOFING:
+
+Command:                     Description:
+-----------------------------------------------------------------------------------------
+nmap x.x.x.x -f              Requested scan (including ping scans) use tiny fragmented IP packets. Harder for packet filters |
+----------------------------------------------------------------------------------------------------------------------------
+nmap x.x.x.x --mtu 32        Set your own offset size |
+---------------------------------------------------------------------------------------
+nmap -D x.x.x.x,y.y.y.y,z.z.z.z,a.a.a.a,b.b.b.b,c.c.c.c | Send scans from spoofed IPs |
+---------------------------------------------------------------------------------------------------------
+nmap -S www.microsoft.com www.facebook.com | Scan Facebook from Microsoft (-e eth0 -Pn may be required) |
+---------------------------------------------------------------------------------------------------------
+nmap -g x.x.x.x              Use given source port number |
+----------------------------------------------------------------------------------------------------------------
+nmap --proxies http://x.x.x.x:8080,http://y.y.y.y:8080 a.a.a.a | Relay connections through HTTP/SOCKS4 proxies |
+----------------------------------------------------------------------------------------------------------------
+nmap --data-length 200 x.x.x.x | Appends random data to sent packets |
+----------------------------------------------------------------------
+
+Example IDS Evasion command: 
+
+nmap -f -t 0 -n -Pn --data-length 200 -D x.x.x.x,y.y.y.y,a.a.a.a,b.b.b.b z.z.z.z
+
+<<<------------------------------------------------->>>
+
+OUTPUT:
+
+Command:                     Description:
+----------------------------------------------------------------------
+nmap x.x.x.x -oN normal.file | Normal output to the file normal.file |
+----------------------------------------------------------------------
+nmap x.x.x.x -oX xml.file    XML output to the file xml.file |
+---------------------------------------------------------------
+nmap x.x.x.x -oG grep.file   Grepable output to the grep.file |
+------------------------------------------------------------------------
+nmap x.x.x.x -oA results     Output in the three major formats at once |
+-----------------------------------------------------------------------------------
+nmap x.x.x.x -oG --          Grepable output to screen. -oN -, -oX -- also usable |
+-----------------------------------------------------------------------------------
+nmap x.x.x.x -oN file.file --apend-output | Append a scan to a previous scan file |
+------------------------------------------------------------------------------------------------
+nmap x.x.x.x -v              Increase the verbosity level (use -vv or more for greater effect) |
+------------------------------------------------------------------------------------------------
+nmap x.x.x.x -d              Increase debugging level (use -dd or more for greater effect) |
+-----------------------------------------------------------------------------------------------------
+nmap x.x.x.x --reason        Display the reason a port is in a particular state, same output as -vv |
+-----------------------------------------------------------------------------------------------------
+nmap x.x.x.x --open          Only show open (or possibly open) ports |
+----------------------------------------------------------------------
+nmap x.x.x.x -T4 --packet-trace | Show all packets sent and received |
+----------------------------------------------------------------------
+nmap --iflist                Shows the host interfaces and routes |
+-------------------------------------------------------------------
+nmap --resume results.file   Resume a scan |
+--------------------------------------------
+
+<<<--------------------------------------------------->>>
+
+HELPFUL NMAP OUTPUT EXAMPLES:
+
+Command:                     Description:
+----------------------------------------------------------------------------------------------------------------------------
+nmap -pxx -sV -oG -- --open x.x.x.x/24 | grep open || Scan for web servers and grep to show which IPs are running web servers |
+-----------------------------------------------------------------------------------------------------------------------------
+nmap -iR 10 -n -oX out.xml | grep "Nmap" | cut -d "" -f5 > live-hosts.txt || Generate a list of the Ips of live hosts |
+-----------------------------------------------------------------------------------------------------------------------
+nmap -iR 10 -n -oX out2.xml | grep "Nmap" | cut -d "" -f5 >> live-hosts.txt || Append IP to the list of live hosts |
+--------------------------------------------------------------------------------------------------------------------
+ndiff scanl.xml scan2.xml     Compare output from nmap using the ndif |
+-----------------------------------------------------------------------
+xsltproc nmap.xml -o nmap.html | Convert nmap xml files to html files |
+---------------------------------------------------------------------------------------------------------------------------
+grep " open " results.nmap | sed -r 's/ +/ /g' | sort | uniq -c | sort -rn | less || Reverse sorted list of how often ports turn up | 
+---------------------------------------------------------------------------------------------------------------------------
+
+<<<---------------------------------------------------->>>
+
+MISCELLANEOUS OPTION:
+
+Command:                     Description:
+-----------------------------------------------------
+nmap -6 xxxx:xxxx:xxxx:xx::x | Enable IPv6 scanning |
+-----------------------------------------------------
+nmap -h                      nmap help screen |
+-----------------------------------------------
+
+<<<---------------------------------------------------->>>
+
+OTHER USEFUL NMAP COMMANDS:
+
+Command:                     Description:
+-----------------------------------------------------------------------------------------
+nmap -iR 10 -PSxx-xx,xx,xxx,xxxx,xxxxx -v -sn | Discovery only on ports x, no port scan |
+-----------------------------------------------------------------------------------------
+nmap x.x.x.x-x/xx -PR -sn -vv | Arp discovery only on local network, no port scan |
+-----------------------------------------------------------------------------------
+nmap -iR 10 -sn -traceroute | Traceroute to random targets, no port scan |
+--------------------------------------------------------------------------
+nmap x.x.x.x-xx -sL --dns-server x.x.x.x | Query the Internal DNS for hosts, list targets only|
+-----------------------------------------------------------------------------------------------
+
+<<<---------------------------------------------------->>>
+
+ _   _                           _ 
+| |_| |__   ___    ___ _ __   __| |
+| __| '_ \ / _ \  / _ \ '_ \ / _` |
+| |_| | | |  __/ |  __/ | | | (_| |
+ \__|_| |_|\___|  \___|_| |_|\__,_|
+                                   
+
