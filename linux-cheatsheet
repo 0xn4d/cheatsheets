@@ -26,5 +26,7 @@ mkdir <name-of-path>            Make a directory |
 rmdir <name-of-path>            Remove an empty directory |
 ----------------------------------------------------------- 
 rm <file>                       Remove a file |
------------------------------------------------
+------------------------------------------------------------------------------
+vi/vim <name-of-the-file>       Call the vi/vim file editor to create e file |
+------------------------------------------------------------------------------
 
