@@ -1,3 +1,3 @@
-# cheat-sheets
+# cheatsheets
 
-- [Nmap cheat-sheet](nmap-cheatsheet)
+- [Nmap cheatsheet](nmap-cheatsheet)
