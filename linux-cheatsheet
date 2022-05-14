@@ -7,26 +7,48 @@
 ^                                                          ^
 <<<------------------------------------------------------>>>
 
-DAILY COMMANDS:
+BASH COMMANDS:
 
 Command:                        Description:
+--------------------------------------------------------
+uname -a                        Show system and kernel |
+--------------------------------------------------------
+head -n1 /etc/issue             Show distribution |
+----------------------------------------------------------
+mount                           Show mounted filesystems |
+----------------------------------------------------------
+date                            Show system date |
 --------------------------------------------------
-cd <path>                       Change directory |
---------------------------------------------------------------------
-ls                              List files in the current directory |
--------------------------------------------------------------------------------
-mv <file/path> <path>           Rename or move some file or path to some path |
--------------------------------------------------------------------------------
-scp <file> <path>               Safe copy a file to a path |
+uptime                          Show uptime |
+----------------------------------------------------
+whoami                          Show your username |
+---------------------------------------------------------
+man <command>                   Show manual for command |
+---------------------------------------------------------
+
+<<<----------------------------------------------->>>
+
+DIRECTORY COMMANDS:
+
+Command:                        Description:
 ------------------------------------------------------------
-cp <file> <path>                Copy a file to a path |
--------------------------------------------------------
-mkdir <name-of-path>            Make a directory |
+pwd                             Show the current directory |
+------------------------------------------------------------
+mkdir <name_of_the_directory>   Make a directory |
+--------------------------------------------------
+cd <directory>                  Change directory |
+--------------------------------------------------------------
+cd ..                           Go to the previous directory |
+--------------------------------------------------------------
+ls                              List files in a directory |
 -----------------------------------------------------------
-rmdir <name-of-path>            Remove an empty directory |
------------------------------------------------------------ 
-rm <file>                       Remove a file |
-------------------------------------------------------------------------------
-vi/vim <name-of-the-file>       Call the vi/vim file editor to create e file |
-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
